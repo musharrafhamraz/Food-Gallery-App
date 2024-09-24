@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "672266491056",
+    "project_id": "tailorshop-app-7a172",
+    "storage_bucket": "tailorshop-app-7a172.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:672266491056:android:395ec9f7f8c831d26dd775",
+        "android_client_info": {
+          "package_name": "com.tailor.tailorapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC62qZwiruzQlKY62Urk7A8vuxC-S_C1Q8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
