@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:tailorapp/auth/auth_services.dart';
 import 'package:tailorapp/auth/sign_up_screen.dart';
+import 'package:tailorapp/screens/customer_dashboard.dart';
+import 'package:tailorapp/screens/tailor_dashboard.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -38,13 +40,31 @@ class LoginScreenState extends State<LoginScreen> {
             ElevatedButton(
               onPressed: () async {
                 try {
-                  await _authService.loginUser(
+                  // Login and retrieve role
+                  String? role = await _authService.loginUser(
                     _emailController.text,
                     _passwordController.text,
                   );
-                  // Show success message or navigate to another screen
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Login Successful')));
+
+                  // Navigate to the appropriate dashboard based on role
+                  if (role == 'tailor') {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const TailorDashboard()),
+                    );
+                  } else if (role == 'customer') {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CustomerDashboard()),
+                    );
+                  } else {
+                    // Handle case if role is not found
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('Invalid user role'),
+                    ));
+                  }
                 } catch (e) {
                   // Show error message
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -54,13 +74,14 @@ class LoginScreenState extends State<LoginScreen> {
               child: const Text('Login'),
             ),
             ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) {
-                    return const SignupScreen();
-                  }));
-                },
-                child: const Text('No Have Account.'))
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return const SignupScreen();
+                }));
+              },
+              child: const Text('SignUP'),
+            ),
           ],
         ),
       ),
