@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tailorapp/auth/auth_services.dart';
+import 'package:tailorapp/auth/login_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -114,6 +115,10 @@ class SignupScreenState extends State<SignupScreen> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Signed Up Successfully')),
                     );
+                    Navigator.of(context)
+                        .pushReplacement(MaterialPageRoute(builder: (context) {
+                      return const LoginScreen();
+                    }));
                   } catch (e) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Sign Up Failed')),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tailorapp/auth/auth_services.dart';
+import 'package:tailorapp/screens/customer_dashboard.dart';
+import 'package:tailorapp/screens/tailor_dashboard.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -75,18 +77,31 @@ class LoginScreenState extends State<LoginScreen> {
               ),
               onPressed: () async {
                 try {
+                  // Login and retrieve user credentials
                   await _authService.loginUser(
                     _emailController.text,
                     _passwordController.text,
                   );
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Logged in Successfully')),
-                  );
-                  // Navigate to home screen or next screen
+
+                  // Check if the email is the specific owner email
+                  if (_emailController.text == 'foodgallery@gmail.com') {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const TailorDashboard()),
+                    );
+                  } else {
+                    // Navigate to customer dashboard for all other users
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CustomerDashboard()),
+                    );
+                  }
                 } catch (e) {
+                  // Show error message
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Login Failed')),
-                  );
+                      const SnackBar(content: Text('Login Failed')));
                 }
               },
               child: const Text(
