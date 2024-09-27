@@ -130,7 +130,7 @@ class _TailorDashboardState extends State<TailorDashboard>
               margin:
                   const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
               color: Colors.orangeAccent
-                  .withOpacity(0.1), // Themed background color
+                  .withOpacity(0.1), // Themed background color..
               child: ListTile(
                 leading: const CircleAvatar(
                   backgroundColor: Colors.orangeAccent,
