@@ -1,16 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:tailorapp/screens/menu_item_details_screen.dart';
+import 'package:tailorapp/screens/customer_side/menu_list_item_details.dart';
 import 'package:tailorapp/widgets/menu_item.dart';
 
-class MenuListScreen extends StatelessWidget {
-  const MenuListScreen({super.key});
+class UserMenuListScreen extends StatelessWidget {
+  const UserMenuListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Menu Items'),
+        title: const Text('Food Gallery'),
         backgroundColor: Colors.orangeAccent,
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -56,7 +56,7 @@ class MenuListScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MenuItemDetailScreen(
+                      builder: (context) => UserMenuItemDetailScreen(
                         name: menuItem['name'],
                         description: menuItem['description'],
                         price: menuItem['price'].toString(),

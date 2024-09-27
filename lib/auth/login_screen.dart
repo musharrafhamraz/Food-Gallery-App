@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tailorapp/auth/auth_services.dart';
-import 'package:tailorapp/screens/customer_dashboard.dart';
+import 'package:tailorapp/screens/customer_side/customer_dashboard.dart';
 import 'package:tailorapp/screens/tailor_dashboard.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -95,7 +95,7 @@ class LoginScreenState extends State<LoginScreen> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const CustomerDashboard()),
+                          builder: (context) => const UserMenuListScreen()),
                     );
                   }
                 } catch (e) {

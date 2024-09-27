@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tailorapp/screens/add_menu_screen.dart';
+// import 'package:tailorapp/screens/add_menu_screen.dart';
+import 'package:tailorapp/screens/list_of_menu_items.dart';
 
 class TailorDashboard extends StatefulWidget {
   const TailorDashboard({super.key});
@@ -63,7 +64,7 @@ class _TailorDashboardState extends State<TailorDashboard>
         onPressed: () {
           // Add action when the button is pressed
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const MenuInputScreen();
+            return const MenuListScreen();
           }));
         },
         backgroundColor: Colors.orangeAccent,
