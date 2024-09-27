@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tailorapp/firebase/order_services.dart';
 import 'package:tailorapp/widgets/custom_button.dart';
 
 class UserMenuItemDetailScreen extends StatefulWidget {
@@ -157,6 +159,13 @@ class _UserMenuItemDetailScreenState extends State<UserMenuItemDetailScreen> {
                   // Place order
                   CustomButton(
                     onPress: () {
+                      placeOrder(widget.name, _quantity, widget.price)
+                          .then((_) {
+                        Fluttertoast.showToast(
+                            msg: 'Order Placed Successfully.');
+                      }).catchError((error) {
+                        Fluttertoast.showToast(msg: 'Error Placing Order.');
+                      });
                       // logic for placing order here.
                     },
                     buttonTxt: 'Place Order',
