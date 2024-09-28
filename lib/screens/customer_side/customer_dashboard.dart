@@ -12,6 +12,7 @@ class UserMenuListScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Food Gallery'),
         backgroundColor: Colors.orangeAccent,
+        foregroundColor: Colors.white,
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('menuItems').snapshots(),

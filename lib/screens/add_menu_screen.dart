@@ -34,6 +34,7 @@ class _MenuInputScreenState extends State<MenuInputScreen> {
       appBar: AppBar(
         title: const Text('Add Menu Item'),
         backgroundColor: Colors.orangeAccent,
+        foregroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
         child: Padding(

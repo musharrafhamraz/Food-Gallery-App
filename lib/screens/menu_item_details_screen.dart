@@ -21,6 +21,7 @@ class MenuItemDetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(name),
         backgroundColor: Colors.orangeAccent,
+        foregroundColor: Colors.white,
       ),
       body: Column(
         children: [

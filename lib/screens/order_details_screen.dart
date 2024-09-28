@@ -22,6 +22,7 @@ class OrderDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Order Details: $itemName'),
         backgroundColor: Colors.orangeAccent,
+        foregroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tailorapp/screens/add_menu_screen.dart';
+import 'package:tailorapp/screens/list_of_menu_items.dart';
 
 class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({Key? key}) : super(key: key);
+  const CustomDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class CustomDrawer extends StatelessWidget {
               style: TextStyle(color: Colors.white70),
             ),
             currentAccountPicture: CircleAvatar(
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.orangeAccent,
               child: Image(
                 image: AssetImage('assets/images/food.png'),
               ),
@@ -48,73 +50,63 @@ class CustomDrawer extends StatelessWidget {
           // ListTile for Orders
           ListTile(
             leading: const Icon(
-              Icons.shopping_cart,
+              Icons.restaurant_menu,
               color: Colors.orangeAccent,
             ),
-            title: const Text('Orders'),
+            title: const Text('Menu'),
             onTap: () {
               // Navigate to Orders
               Navigator.pop(context);
-              Navigator.pushNamed(context, '/orders'); // Assuming a named route
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return const MenuListScreen();
+              })); // Assuming a named route
             },
           ),
           // ListTile for Progress
           ListTile(
             leading: const Icon(
-              Icons.check,
+              Icons.restaurant_outlined,
               color: Colors.orangeAccent,
             ),
-            title: const Text('Progress'),
+            title: const Text('Add Menu Item'),
             onTap: () {
               // Navigate to Progress
               Navigator.pop(context);
-              Navigator.pushNamed(
-                  context, '/progress'); // Assuming a named route
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return const MenuInputScreen();
+              }));
             },
           ),
-          // ListTile for Completed
-          ListTile(
-            leading: const Icon(
-              Icons.check_circle_outline,
-              color: Colors.orangeAccent,
-            ),
-            title: const Text('Completed'),
-            onTap: () {
-              // Navigate to Completed
-              Navigator.pop(context);
-              Navigator.pushNamed(
-                  context, '/completed'); // Assuming a named route
-            },
-          ),
-          const Divider(), // Divider for separation
+
+          // const Divider(), // Divider for separation
 
           // ListTile for Settings
-          ListTile(
-            leading: const Icon(
-              Icons.settings,
-              color: Colors.orangeAccent,
-            ),
-            title: const Text('Settings'),
-            onTap: () {
-              // Navigate to Settings
-              Navigator.pop(context);
-              Navigator.pushNamed(
-                  context, '/settings'); // Assuming a named route
-            },
-          ),
-          // ListTile for Logout
-          ListTile(
-            leading: const Icon(
-              Icons.logout,
-              color: Colors.orangeAccent,
-            ),
-            title: const Text('Logout'),
-            onTap: () {
-              // Handle logout
-              Navigator.pop(context);
-              // Add logout functionality here
-            },
-          ),
+          // ListTile(
+          //   leading: const Icon(
+          //     Icons.settings,
+          //     color: Colors.orangeAccent,
+          //   ),
+          //   title: const Text('Settings'),
+          //   onTap: () {
+          //     // Navigate to Settings
+          //     Navigator.pop(context);
+          //     Navigator.pushNamed(
+          //         context, '/settings'); // Assuming a named route
+          //   },
+          // ),
+          // // ListTile for Logout
+          // ListTile(
+          //   leading: const Icon(
+          //     Icons.logout,
+          //     color: Colors.orangeAccent,
+          //   ),
+          //   title: const Text('Logout'),
+          //   onTap: () {
+          //     // Handle logout
+          //     Navigator.pop(context);
+          //     // Add logout functionality here
+          //   },
+          // ),
         ],
       ),
     );

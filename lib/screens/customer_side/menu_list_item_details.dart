@@ -47,6 +47,7 @@ class _UserMenuItemDetailScreenState extends State<UserMenuItemDetailScreen> {
       appBar: AppBar(
         title: Text(widget.name),
         backgroundColor: Colors.orangeAccent,
+        foregroundColor: Colors.white,
       ),
       body: Column(
         children: [
