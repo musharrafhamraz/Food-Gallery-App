@@ -79,63 +79,6 @@ class _MenuInputScreenState extends State<MenuInputScreen> {
                 ),
               ),
               const SizedBox(height: 40),
-              // ElevatedButton(
-              //   onPressed: () async {
-              //     final String name = _nameController.text;
-              //     final String description = _descriptionController.text;
-              //     final String price = _priceController.text;
-
-              //     if (name.isEmpty ||
-              //         description.isEmpty ||
-              //         price.isEmpty ||
-              //         _imageFile == null) {
-              //       ScaffoldMessenger.of(context).showSnackBar(
-              //         const SnackBar(
-              //             content: Text(
-              //                 'Please fill in all fields and pick an image')),
-              //       );
-              //       return;
-              //     }
-
-              //     try {
-              //       FirebaseService firebaseService = FirebaseService();
-              //       await firebaseService.saveMenuItem(
-              //         name: name,
-              //         description: description,
-              //         price: price,
-              //         imageFile: _imageFile!,
-              //       );
-
-              //       ScaffoldMessenger.of(context).showSnackBar(
-              //         const SnackBar(
-              //             content: Text('Menu item added successfully!')),
-              //       );
-
-              //       // Clear the fields after successful submission
-              //       _nameController.clear();
-              //       _descriptionController.clear();
-              //       _priceController.clear();
-              //       setState(() {
-              //         _imageFile = null;
-              //       });
-              //     } catch (e) {
-              //       ScaffoldMessenger.of(context).showSnackBar(
-              //         SnackBar(content: Text('Error: $e')),
-              //       );
-              //     }
-              //   },
-              //   style: ElevatedButton.styleFrom(
-              //     backgroundColor: Colors.orangeAccent,
-              //     padding: const EdgeInsets.symmetric(vertical: 16.0),
-              //     shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(10.0),
-              //     ),
-              //   ),
-              //   child: const Text(
-              //     'Add Menu Item',
-              //     style: TextStyle(fontSize: 18, color: Colors.white),
-              //   ),
-              // ),
               CustomButton(
                 onPress: () async {
                   final String name = _nameController.text;

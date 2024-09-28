@@ -6,7 +6,8 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   // Sign Up Method (no role needed)
-  Future<void> signUpUser(String email, String password) async {
+  Future<void> signUpUser(String email, String password, String name,
+      String age, String gender) async {
     try {
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
@@ -14,11 +15,14 @@ class AuthService {
         password: password,
       );
 
-      // Save user data (email only, no role)
+      // Save additional fields in Firestore
       await FirebaseFirestore.instance
           .collection('users')
           .doc(userCredential.user!.uid)
           .set({
+        'name': name,
+        'age': age,
+        'gender': gender,
         'email': email,
       });
 

@@ -47,56 +47,35 @@ class SignupScreenState extends State<SignupScreen> {
               ),
               const SizedBox(height: 20),
               // Name Field
-              TextField(
+              SignupTextField(
                 controller: _nameController,
-                decoration: const InputDecoration(
-                  labelText: 'Full Name',
-                  prefixIcon: Icon(Icons.person, color: Colors.orangeAccent),
-                  border: OutlineInputBorder(),
-                ),
+                label: 'Name',
               ),
+
               const SizedBox(height: 15),
               // Age Field
-              TextField(
+              SignupTextField(
                 controller: _ageController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'Age',
-                  prefixIcon: Icon(Icons.cake, color: Colors.orangeAccent),
-                  border: OutlineInputBorder(),
-                ),
+                label: 'Age',
               ),
               const SizedBox(height: 15),
               // Gender Field
-              TextField(
+              SignupTextField(
                 controller: _genderController,
-                decoration: const InputDecoration(
-                  labelText: 'Gender',
-                  prefixIcon:
-                      Icon(Icons.transgender, color: Colors.orangeAccent),
-                  border: OutlineInputBorder(),
-                ),
+                label: 'Gender',
               ),
+
               const SizedBox(height: 15),
               // Email Field
-              TextField(
+              SignupTextField(
                 controller: _emailController,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                  prefixIcon: Icon(Icons.email, color: Colors.orangeAccent),
-                  border: OutlineInputBorder(),
-                ),
+                label: 'Email',
               ),
               const SizedBox(height: 15),
               // Password Field
-              TextField(
+              SignupTextField(
                 controller: _passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
-                  prefixIcon: Icon(Icons.lock, color: Colors.orangeAccent),
-                  border: OutlineInputBorder(),
-                ),
+                label: 'Password',
               ),
               const SizedBox(height: 20),
               // Signup Button
@@ -111,6 +90,9 @@ class SignupScreenState extends State<SignupScreen> {
                     await _authService.signUpUser(
                       _emailController.text,
                       _passwordController.text,
+                      _ageController.text,
+                      _nameController.text,
+                      _genderController.text,
                     );
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Signed Up Successfully')),
@@ -140,6 +122,28 @@ class SignupScreenState extends State<SignupScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class SignupTextField extends StatelessWidget {
+  final TextEditingController controller;
+  final String label;
+  const SignupTextField({
+    super.key,
+    required this.controller,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: label,
+        prefixIcon: const Icon(Icons.person, color: Colors.orangeAccent),
+        border: const OutlineInputBorder(),
       ),
     );
   }
