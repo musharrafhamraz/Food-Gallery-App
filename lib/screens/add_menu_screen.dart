@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tailorapp/firebase/firebase_services.dart';
+import 'package:tailorapp/screens/tailor_dashboard.dart';
 import 'package:tailorapp/widgets/custom_button.dart';
 import 'package:tailorapp/widgets/custom_textfield.dart';
 
@@ -124,6 +125,10 @@ class _MenuInputScreenState extends State<MenuInputScreen> {
                       SnackBar(content: Text('Error: $e')),
                     );
                   }
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return const TailorDashboard();
+                  }));
                 },
                 buttonTxt: 'Add Menu Item',
               )

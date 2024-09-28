@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tailorapp/auth/auth_services.dart';
 import 'package:tailorapp/screens/customer_side/customer_dashboard.dart';
 import 'package:tailorapp/screens/tailor_dashboard.dart';
+import 'package:tailorapp/widgets/custom_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -23,6 +24,7 @@ class LoginScreenState extends State<LoginScreen> {
         title: const Text('Food Gallery'),
         centerTitle: true,
         backgroundColor: Colors.orangeAccent, // Foody theme color
+        foregroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -69,13 +71,10 @@ class LoginScreenState extends State<LoginScreen> {
               ),
             ),
             const SizedBox(height: 20),
+
             // Login Button
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orangeAccent,
-                padding: const EdgeInsets.symmetric(vertical: 16),
-              ),
-              onPressed: () async {
+            CustomButton(
+              onPress: () async {
                 try {
                   // Login and retrieve user credentials
                   await _authService.loginUser(
@@ -85,15 +84,13 @@ class LoginScreenState extends State<LoginScreen> {
 
                   // Check if the email is the specific owner email
                   if (_emailController.text == 'foodgallery@gmail.com') {
-                    Navigator.pushReplacement(
-                      context,
+                    Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
                           builder: (context) => const TailorDashboard()),
                     );
                   } else {
                     // Navigate to customer dashboard for all other users
-                    Navigator.pushReplacement(
-                      context,
+                    Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
                           builder: (context) => const UserMenuListScreen()),
                     );
@@ -104,11 +101,9 @@ class LoginScreenState extends State<LoginScreen> {
                       const SnackBar(content: Text('Login Failed')));
                 }
               },
-              child: const Text(
-                'Login',
-                style: TextStyle(fontSize: 18),
-              ),
+              buttonTxt: 'Login',
             ),
+
             const SizedBox(height: 10),
             // Forgot Password Text Button
             TextButton(

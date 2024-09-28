@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tailorapp/auth/auth_services.dart';
 import 'package:tailorapp/auth/login_screen.dart';
+import 'package:tailorapp/widgets/custom_button.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -24,6 +25,7 @@ class SignupScreenState extends State<SignupScreen> {
       appBar: AppBar(
         title: const Text('Signup'),
         backgroundColor: Colors.orangeAccent, // Food-inspired color
+        foregroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -50,6 +52,8 @@ class SignupScreenState extends State<SignupScreen> {
               SignupTextField(
                 controller: _nameController,
                 label: 'Name',
+                icon: Icons.person, // Icon for name field
+                passwordText: false,
               ),
 
               const SizedBox(height: 15),
@@ -57,12 +61,16 @@ class SignupScreenState extends State<SignupScreen> {
               SignupTextField(
                 controller: _ageController,
                 label: 'Age',
+                icon: Icons.cake,
+                passwordText: false,
               ),
               const SizedBox(height: 15),
               // Gender Field
               SignupTextField(
                 controller: _genderController,
                 label: 'Gender',
+                icon: Icons.transgender,
+                passwordText: false,
               ),
 
               const SizedBox(height: 15),
@@ -70,22 +78,22 @@ class SignupScreenState extends State<SignupScreen> {
               SignupTextField(
                 controller: _emailController,
                 label: 'Email',
+                icon: Icons.email,
+                passwordText: false,
               ),
               const SizedBox(height: 15),
               // Password Field
               SignupTextField(
                 controller: _passwordController,
                 label: 'Password',
+                icon: Icons.lock,
+                passwordText: true,
               ),
               const SizedBox(height: 20),
+
               // Signup Button
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      Colors.orangeAccent, // Foody theme button color
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                ),
-                onPressed: () async {
+              CustomButton(
+                onPress: () async {
                   try {
                     await _authService.signUpUser(
                       _emailController.text,
@@ -107,11 +115,9 @@ class SignupScreenState extends State<SignupScreen> {
                     );
                   }
                 },
-                child: const Text(
-                  'Sign Up',
-                  style: TextStyle(fontSize: 18),
-                ),
+                buttonTxt: 'Sign Up',
               ),
+
               const SizedBox(height: 10),
               // Terms and Conditions
               const Text(
@@ -130,19 +136,24 @@ class SignupScreenState extends State<SignupScreen> {
 class SignupTextField extends StatelessWidget {
   final TextEditingController controller;
   final String label;
+  final IconData icon;
+  final bool passwordText;
   const SignupTextField({
     super.key,
     required this.controller,
     required this.label,
+    required this.icon,
+    required this.passwordText,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
+      obscureText: passwordText,
       decoration: InputDecoration(
         labelText: label,
-        prefixIcon: const Icon(Icons.person, color: Colors.orangeAccent),
+        prefixIcon: Icon(icon, color: Colors.orangeAccent),
         border: const OutlineInputBorder(),
       ),
     );
