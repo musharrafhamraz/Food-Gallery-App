@@ -6,6 +6,19 @@ import 'package:tailorapp/auth/sign_up_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  // // Notification based code
+
+  // FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+  // // Request permissions to show notifications (iOS only)
+  // await messaging.requestPermission();
+
+  // // Optionally: Subscribe to a topic, if needed
+  // await messaging.subscribeToTopic('restaurant_notifications');
+
+  // // code ends here......
+
   runApp(
     const MyApp(),
   );

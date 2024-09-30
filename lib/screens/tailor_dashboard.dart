@@ -166,6 +166,27 @@ class TailorDashboardState extends State<TailorDashboard>
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+
+    // Notification code may cause errors..........
+    // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    //   print('New order notification: ${message.notification?.title}');
+    //   // Display notification message as needed (e.g., showing a dialog or updating the UI)
+    //   showDialog(
+    //     context: context,
+    //     builder: (context) => AlertDialog(
+    //       title: Text(message.notification?.title ?? "New Order"),
+    //       content: Text(message.notification?.body ?? "You have a new order."),
+    //       actions: [
+    //         TextButton(
+    //           onPressed: () => Navigator.of(context).pop(),
+    //           child: Text("OK"),
+    //         ),
+    //       ],
+    //     ),
+    //   );
+    // });
+
+// Notification code may cause errors..........code ends here....
   }
 
   @override
