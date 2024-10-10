@@ -13,8 +13,8 @@ class OrderDetailsScreen extends StatelessWidget {
     required this.itemName,
     required this.quantity,
     required this.price,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
