@@ -115,7 +115,10 @@ class SignupScreenState extends State<SignupScreen> {
                     );
                   }
                 },
-                buttonTxt: 'Sign Up',
+                buttonTxt: const Text(
+                  'SIGN UP',
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
               ),
 
               const SizedBox(height: 10),

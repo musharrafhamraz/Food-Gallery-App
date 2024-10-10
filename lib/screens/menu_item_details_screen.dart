@@ -94,10 +94,14 @@ class MenuItemDetailScreen extends StatelessWidget {
             child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: CustomButton(
-                    onPress: () {
-                      // logic for updating the food item here.
-                    },
-                    buttonTxt: 'Update Food Item')),
+                  onPress: () {
+                    // logic for updating the food item here.
+                  },
+                  buttonTxt: const Text(
+                    'Update Food Item',
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                )),
           ),
         ],
       ),

@@ -43,7 +43,10 @@ class OrderDetailsScreen extends StatelessWidget {
                 await moveOrder(orderId, 'orders', 'progress');
                 Navigator.pop(context);
               },
-              buttonTxt: 'Accept Order',
+              buttonTxt: const Text(
+                'Accept Order',
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ),
             ),
           ],
         ),

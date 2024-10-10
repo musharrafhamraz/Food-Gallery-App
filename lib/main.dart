@@ -1,23 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:tailorapp/auth/login_screen.dart';
 import 'package:tailorapp/auth/sign_up_screen.dart';
+import 'package:tailorapp/screens/customer_side/customer_dashboard.dart';
+// import 'package:tailorapp/screens/tailor_dashboard.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
-  // // Notification based code
-
-  // FirebaseMessaging messaging = FirebaseMessaging.instance;
-
-  // // Request permissions to show notifications (iOS only)
-  // await messaging.requestPermission();
-
-  // // Optionally: Subscribe to a topic, if needed
-  // await messaging.subscribeToTopic('restaurant_notifications');
-
-  // // code ends here......
 
   runApp(
     const MyApp(),
@@ -27,17 +18,26 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Food Gallery App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      // home: IkChatBotScreen(),
-      home: const LoginScreen(),
+      home: FirebaseAuth.instance.currentUser != null &&
+              FirebaseAuth.instance.currentUser!.emailVerified
+          ? const UserMenuListScreen()
+          : const LoginScreen(),
+
+      // home: FirebaseAuth.instance.currentUser != null &&
+      //         FirebaseAuth.instance.currentUser!.emailVerified
+      //     ? FirebaseAuth.instance.currentUser!.email != 'foodgallery@gmail.com'
+      //         ? const UserMenuListScreen()
+      //         : const LoginScreen()
+      //     : const TailorDashboard(),
+
       routes: {
         '/signup': (context) => const SignupScreen(),
       },

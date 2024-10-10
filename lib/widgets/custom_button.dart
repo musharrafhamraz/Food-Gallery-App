@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   final VoidCallback onPress;
-  final String buttonTxt;
+  final Widget buttonTxt;
 
   const CustomButton({
     super.key,
@@ -23,10 +23,7 @@ class CustomButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
           ),
         ),
-        child: Text(
-          buttonTxt,
-          style: const TextStyle(fontSize: 18, color: Colors.white),
-        ),
+        child: buttonTxt,
       ),
     );
   }

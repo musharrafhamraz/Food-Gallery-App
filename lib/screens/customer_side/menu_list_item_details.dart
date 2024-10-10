@@ -169,7 +169,10 @@ class _UserMenuItemDetailScreenState extends State<UserMenuItemDetailScreen> {
                       });
                       // logic for placing order here.
                     },
-                    buttonTxt: 'Place Order',
+                    buttonTxt: const Text(
+                      'Place Order',
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
                   ),
                 ],
               ),

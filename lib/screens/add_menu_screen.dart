@@ -130,7 +130,10 @@ class _MenuInputScreenState extends State<MenuInputScreen> {
                     return const TailorDashboard();
                   }));
                 },
-                buttonTxt: 'Add Menu Item',
+                buttonTxt: const Text(
+                  'Add Menu Item',
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
               )
             ],
           ),

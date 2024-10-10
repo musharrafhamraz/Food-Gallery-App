@@ -47,4 +47,9 @@ class AuthService {
       rethrow;
     }
   }
+
+  // Logout method
+  Future<void> logoutUser() async {
+    _auth.signOut();
+  }
 }

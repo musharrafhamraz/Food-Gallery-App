@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:tailorapp/auth/auth_services.dart';
+import 'package:tailorapp/auth/login_screen.dart';
 import 'package:tailorapp/screens/add_menu_screen.dart';
 import 'package:tailorapp/screens/list_of_menu_items.dart';
+import 'package:tailorapp/widgets/dialog_box.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final AuthService auth = AuthService();
+
     return Drawer(
       child: Column(
         children: [
@@ -78,35 +83,34 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
 
-          // const Divider(), // Divider for separation
-
-          // ListTile for Settings
-          // ListTile(
-          //   leading: const Icon(
-          //     Icons.settings,
-          //     color: Colors.orangeAccent,
-          //   ),
-          //   title: const Text('Settings'),
-          //   onTap: () {
-          //     // Navigate to Settings
-          //     Navigator.pop(context);
-          //     Navigator.pushNamed(
-          //         context, '/settings'); // Assuming a named route
-          //   },
-          // ),
+          const Divider(), // Divider for separation
           // // ListTile for Logout
-          // ListTile(
-          //   leading: const Icon(
-          //     Icons.logout,
-          //     color: Colors.orangeAccent,
-          //   ),
-          //   title: const Text('Logout'),
-          //   onTap: () {
-          //     // Handle logout
-          //     Navigator.pop(context);
-          //     // Add logout functionality here
-          //   },
-          // ),
+          ListTile(
+            leading: const Icon(
+              Icons.logout,
+              color: Colors.orangeAccent,
+            ),
+            title: const Text('Logout'),
+            onTap: () {
+              showConfirmationDialog(
+                context,
+                'Are you sure you want to logout?',
+                () {
+                  try {
+                    auth.logoutUser();
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (conetxt) {
+                      return const LoginScreen();
+                    }));
+                  } catch (e) {
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(SnackBar(content: Text(e.toString())));
+                  }
+                },
+                () => Navigator.of(context).pop(false),
+              );
+            },
+          )
         ],
       ),
     );

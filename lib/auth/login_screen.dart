@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tailorapp/auth/auth_services.dart';
+import 'package:tailorapp/auth/email_verification.dart';
 import 'package:tailorapp/screens/customer_side/customer_dashboard.dart';
 import 'package:tailorapp/screens/tailor_dashboard.dart';
 import 'package:tailorapp/widgets/custom_button.dart';
@@ -16,6 +19,8 @@ class LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   final AuthService _authService = AuthService();
+
+  bool loggingIn = false;
 
   @override
   Widget build(BuildContext context) {
@@ -75,11 +80,13 @@ class LoginScreenState extends State<LoginScreen> {
             // Login Button
             CustomButton(
               onPress: () async {
+                loggingIn = true;
+                setState(() {});
                 try {
                   // Login and retrieve user credentials
-                  await _authService.loginUser(
-                    _emailController.text,
-                    _passwordController.text,
+                  UserCredential? userC = await _authService.loginUser(
+                    _emailController.text.trim(),
+                    _passwordController.text.trim(),
                   );
 
                   // Check if the email is the specific owner email
@@ -89,19 +96,39 @@ class LoginScreenState extends State<LoginScreen> {
                           builder: (context) => const TailorDashboard()),
                     );
                   } else {
+                    if (userC!.user != null) {
+                      if (userC.user!.emailVerified) {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                              builder: (context) => const UserMenuListScreen()),
+                        );
+                      } else {
+                        Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(builder: (context) {
+                          return const EmailVerificationScreen();
+                        }));
+                      }
+                    }
+
                     // Navigate to customer dashboard for all other users
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                          builder: (context) => const UserMenuListScreen()),
-                    );
                   }
                 } catch (e) {
                   // Show error message
                   ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Login Failed')));
+                      SnackBar(content: Text('Login Failed ${e.toString()}')));
+                } finally {
+                  loggingIn = false;
+                  setState(() {});
                 }
               },
-              buttonTxt: 'Login',
+              buttonTxt: loggingIn
+                  ? const SpinKitRipple(
+                      color: Colors.white,
+                    )
+                  : const Text(
+                      'LOGIN',
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
             ),
 
             const SizedBox(height: 10),
