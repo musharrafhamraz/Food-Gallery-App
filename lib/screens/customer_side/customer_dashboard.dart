@@ -114,16 +114,16 @@ class UserMenuListScreen extends StatelessWidget {
                       const Text(
                         'FOOD GALLERY',
                         style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Open Sans'),
                       ),
                       const Text(
                         'Order Your Favourite Food',
                         style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
+                            fontSize: 18,
+                            fontWeight: FontWeight.w300,
+                            fontFamily: 'Open Sans'),
                       ),
                       const SizedBox(height: 16),
                       SingleChildScrollView(
@@ -169,15 +169,19 @@ class UserMenuListScreen extends StatelessWidget {
                         child: Row(
                           children: [
                             CategoryButton(
-                                icon: Icons.fastfood, label: 'Burger'),
+                                imgPath: 'assets/images/burger.png',
+                                label: 'Burger'),
                             CategoryButton(
-                                icon: Icons.local_pizza, label: 'Pizza'),
+                                imgPath: 'assets/images/tea.png', label: 'Tea'),
                             CategoryButton(
-                                icon: Icons.local_dining, label: 'Spaghetti'),
+                                imgPath: 'assets/images/biryani.png',
+                                label: 'Biryani'),
                             CategoryButton(
-                                icon: Icons.rice_bowl, label: 'Fried Rice'),
+                                imgPath: 'assets/images/chinese.png',
+                                label: 'Chinese'),
                             CategoryButton(
-                                icon: Icons.free_breakfast, label: 'Taco'),
+                                imgPath: 'assets/images/juice.png',
+                                label: 'Juices'),
                           ],
                         ),
                       ),
@@ -193,9 +197,9 @@ class UserMenuListScreen extends StatelessWidget {
                         const Text(
                           'Recommended For You',
                           style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Open Sans'),
                         ),
                         TextButton(
                             onPressed: () {}, child: const Text('See All'))
@@ -309,6 +313,7 @@ class UserMenuListScreen extends StatelessWidget {
                   style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'Open Sans',
                       color: Colors.black),
                 ),
                 const SizedBox(height: 8),
@@ -336,27 +341,45 @@ class UserMenuListScreen extends StatelessWidget {
 }
 
 class CategoryButton extends StatelessWidget {
-  final IconData icon;
+  final String imgPath;
   final String label;
 
-  const CategoryButton({super.key, required this.icon, required this.label});
+  const CategoryButton({super.key, required this.label, required this.imgPath});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Column(
-        children: [
-          CircleAvatar(
-            backgroundColor: Colors.orangeAccent,
-            child: Icon(icon, color: Colors.white),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-          ),
-        ],
+    return GestureDetector(
+      onTap: () {
+        // print('hello');
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Column(
+          children: [
+            Container(
+              height: 70,
+              width: 70,
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.orange.shade200, width: 3),
+                  borderRadius: BorderRadius.circular(35)),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(35),
+                child: Image(
+                    fit: BoxFit.contain,
+                    height: 50,
+                    image: AssetImage(imgPath)),
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              label,
+              style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w300,
+                  fontFamily: 'Open Sans'),
+            ),
+          ],
+        ),
       ),
     );
   }
