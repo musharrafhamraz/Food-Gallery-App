@@ -1,7 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:tailorapp/auth/login_screen.dart';
+// import 'package:tailorapp/auth/login_screen.dart';
 import 'package:tailorapp/auth/sign_up_screen.dart';
 import 'package:tailorapp/screens/customer_side/customer_dashboard.dart';
 // import 'package:tailorapp/screens/tailor_dashboard.dart';
@@ -26,17 +26,12 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: FirebaseAuth.instance.currentUser != null &&
-              FirebaseAuth.instance.currentUser!.emailVerified
-          ? const UserMenuListScreen()
-          : const LoginScreen(),
-
       // home: FirebaseAuth.instance.currentUser != null &&
       //         FirebaseAuth.instance.currentUser!.emailVerified
-      //     ? FirebaseAuth.instance.currentUser!.email != 'foodgallery@gmail.com'
-      //         ? const UserMenuListScreen()
-      //         : const LoginScreen()
-      //     : const TailorDashboard(),
+      //     ? const UserMenuListScreen()
+      //     : const LoginScreen(),
+
+      home: const UserMenuListScreen(),
 
       routes: {
         '/signup': (context) => const SignupScreen(),
