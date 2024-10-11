@@ -12,6 +12,7 @@ class FirebaseService {
     required String description,
     required String price,
     required File imageFile,
+    required String category,
   }) async {
     try {
       // Upload the image to Firebase Storage
@@ -23,6 +24,7 @@ class FirebaseService {
         'description': description,
         'price': price,
         'imageUrl': imageUrl, // Save the image URL
+        'category': category,
         'timestamp': FieldValue.serverTimestamp(),
       });
     } catch (e) {

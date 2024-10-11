@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 // import 'package:tailorapp/auth/login_screen.dart';
 import 'package:tailorapp/auth/sign_up_screen.dart';
 import 'package:tailorapp/screens/customer_side/customer_dashboard.dart';
+import 'package:tailorapp/screens/tailor_dashboard.dart';
 // import 'package:tailorapp/screens/tailor_dashboard.dart';
 
 void main() async {
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
       //     ? const UserMenuListScreen()
       //     : const LoginScreen(),
 
-      home: const UserMenuListScreen(),
+      home: const TailorDashboard(),
 
       routes: {
         '/signup': (context) => const SignupScreen(),

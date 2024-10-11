@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class MenuItem extends StatelessWidget {
   final String name;
@@ -34,16 +35,15 @@ class MenuItem extends StatelessWidget {
                   topLeft: Radius.circular(15.0),
                   topRight: Radius.circular(15.0),
                 ),
-                child: Image.network(
-                  imageUrl,
+                child: CachedNetworkImage(
+                  imageUrl: imageUrl,
                   fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) => const Icon(
+                  errorWidget: (context, error, stackTrace) => const Icon(
                     Icons.broken_image,
                     color: Colors.grey,
                     size: 80,
                   ),
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
+                  progressIndicatorBuilder: (context, child, loadingProgress) {
                     return const Center(
                       child: CircularProgressIndicator(),
                     );
@@ -54,7 +54,7 @@ class MenuItem extends StatelessWidget {
 
             // Name, description, and price take 60% of the card height
             Expanded(
-              flex: 5,
+              flex: 6,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(

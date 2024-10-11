@@ -20,6 +20,15 @@ class _MenuInputScreenState extends State<MenuInputScreen> {
   File? _imageFile; // To store the picked image
   final ImagePicker _picker = ImagePicker(); // Image picker instance
 
+  String? _selectedCategory; // To store the selected category
+  final List<String> _categories = [
+    'Fast Food',
+    'Tea',
+    'Biryani',
+    'Chinese',
+    'Juices'
+  ];
+
   Future<void> _pickImage() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
@@ -61,6 +70,30 @@ class _MenuInputScreenState extends State<MenuInputScreen> {
                 keyboardType: TextInputType.number,
               ),
               const SizedBox(height: 20),
+              DropdownButtonFormField<String>(
+                value: _selectedCategory,
+                hint: const Text('Select Category'),
+                items: _categories.map((String category) {
+                  return DropdownMenuItem<String>(
+                    value: category,
+                    child: Text(category),
+                  );
+                }).toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    _selectedCategory = newValue;
+                  });
+                },
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.orange[50],
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    borderSide: BorderSide(color: Colors.orangeAccent),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
               GestureDetector(
                 onTap: _pickImage,
                 child: Container(
@@ -90,11 +123,12 @@ class _MenuInputScreenState extends State<MenuInputScreen> {
                   if (name.isEmpty ||
                       description.isEmpty ||
                       price.isEmpty ||
-                      _imageFile == null) {
+                      _imageFile == null ||
+                      _selectedCategory == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                           content: Text(
-                              'Please fill in all fields and pick an image')),
+                              'Please fill in all fields, pick an image, and select a category')),
                     );
                     return;
                   }
@@ -106,6 +140,8 @@ class _MenuInputScreenState extends State<MenuInputScreen> {
                       description: description,
                       price: price,
                       imageFile: _imageFile!,
+                      category:
+                          _selectedCategory!, // Save the selected category
                     );
 
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -119,6 +155,7 @@ class _MenuInputScreenState extends State<MenuInputScreen> {
                     _priceController.clear();
                     setState(() {
                       _imageFile = null;
+                      _selectedCategory = null;
                     });
                   } catch (e) {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -134,7 +171,7 @@ class _MenuInputScreenState extends State<MenuInputScreen> {
                   'Add Menu Item',
                   style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
-              )
+              ),
             ],
           ),
         ),
