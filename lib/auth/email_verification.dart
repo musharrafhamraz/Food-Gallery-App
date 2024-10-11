@@ -52,55 +52,64 @@ class EmailVerificationScreenState extends State<EmailVerificationScreen> {
         backgroundColor: Colors.orangeAccent,
         foregroundColor: Colors.white,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const SizedBox(height: 20),
-          // Verification Text
-          const Text(
-            'Verify Your Email',
-            style: TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-              color: Colors.orange,
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                opacity: 0.2,
+                image: AssetImage('assets/images/background.jpg'))),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(height: 20),
+            // Verification Text
+            const Text(
+              'Verify Your Email',
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.orange,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 10),
-          // Image to enhance the ambiance
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-            child: Image.asset(
-              'assets/images/verify_email.png', // Use an email-related image
-              height: 300,
+            const SizedBox(height: 10),
+            // Image to enhance the ambiance
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: Image.asset(
+                'assets/images/verify_email.png', // Use an email-related image
+                height: 300,
+              ),
             ),
-          ),
-          const SizedBox(height: 30),
-          // Instruction Text
-          Text(
-            'A Verification has been sent to ${FirebaseAuth.instance.currentUser!.email}',
-            style: const TextStyle(fontSize: 16),
-            textAlign: TextAlign.center,
-          ),
+            const SizedBox(height: 30),
+            // Instruction Text
+            Text(
+              'A Verification has been sent to ${FirebaseAuth.instance.currentUser!.email}',
+              style: const TextStyle(fontSize: 16),
+              textAlign: TextAlign.center,
+            ),
 
-          const SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-          // Resend Code Option
-          TextButton(
-            onPressed: () {
-              // Add your resend code logic here
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                    content: Text('Verification email sent successfully')),
-              );
-            },
-            child: const Text(
-              'Resend Code',
-              style: TextStyle(color: Colors.orangeAccent),
+            // Resend Code Option
+            TextButton(
+              onPressed: () {
+                // Add your resend code logic here
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                      content: Text('Verification email sent successfully')),
+                );
+              },
+              child: const Text(
+                'Resend Code',
+                style: TextStyle(color: Colors.orangeAccent),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

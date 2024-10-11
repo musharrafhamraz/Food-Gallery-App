@@ -50,13 +50,22 @@ class TailorDashboardState extends State<TailorDashboard>
         ),
       ),
       drawer: const CustomDrawer(),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          _buildOrdersTab('orders'),
-          _buildOrdersTab('progress'),
-          _buildOrdersTab('completed'),
-        ],
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                opacity: 0.2,
+                image: AssetImage('assets/images/background.jpg'))),
+        child: TabBarView(
+          controller: _tabController,
+          children: [
+            _buildOrdersTab('orders'),
+            _buildOrdersTab('progress'),
+            _buildOrdersTab('completed'),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

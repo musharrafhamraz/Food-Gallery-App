@@ -49,7 +49,6 @@ class CustomDrawer extends StatelessWidget {
             onTap: () {
               // Navigate to Home
               Navigator.pop(context); // Close the drawer
-              Navigator.pushNamed(context, '/home'); // Assuming a named route
             },
           ),
           // ListTile for Orders
@@ -99,7 +98,7 @@ class CustomDrawer extends StatelessWidget {
                   try {
                     auth.logoutUser();
                     Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (conetxt) {
+                        .pushReplacement(MaterialPageRoute(builder: (conetxt) {
                       return const LoginScreen();
                     }));
                   } catch (e) {

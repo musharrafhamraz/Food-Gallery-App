@@ -27,108 +27,117 @@ class SignupScreenState extends State<SignupScreen> {
         backgroundColor: Colors.orangeAccent, // Food-inspired color
         foregroundColor: Colors.white,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Text(
-                'Welcome to Food Gallery!',
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.orange, // Food-inspired color
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                opacity: 0.2,
+                image: AssetImage('assets/images/background.jpg'))),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const Text(
+                  'Welcome to Food Gallery!',
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.orange, // Food-inspired color
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 10),
-              Image.asset(
-                'assets/images/food.png', // Image of food or restaurant theme
-                height: 150,
-              ),
-              const SizedBox(height: 20),
-              // Name Field
-              SignupTextField(
-                controller: _nameController,
-                label: 'Name',
-                icon: Icons.person, // Icon for name field
-                passwordText: false,
-              ),
-
-              const SizedBox(height: 15),
-              // Age Field
-              SignupTextField(
-                controller: _ageController,
-                label: 'Age',
-                icon: Icons.cake,
-                passwordText: false,
-              ),
-              const SizedBox(height: 15),
-              // Gender Field
-              SignupTextField(
-                controller: _genderController,
-                label: 'Gender',
-                icon: Icons.transgender,
-                passwordText: false,
-              ),
-
-              const SizedBox(height: 15),
-              // Email Field
-              SignupTextField(
-                controller: _emailController,
-                label: 'Email',
-                icon: Icons.email,
-                passwordText: false,
-              ),
-              const SizedBox(height: 15),
-              // Password Field
-              SignupTextField(
-                controller: _passwordController,
-                label: 'Password',
-                icon: Icons.lock,
-                passwordText: true,
-              ),
-              const SizedBox(height: 20),
-
-              // Signup Button
-              CustomButton(
-                onPress: () async {
-                  try {
-                    await _authService.signUpUser(
-                      _emailController.text,
-                      _passwordController.text,
-                      _ageController.text,
-                      _nameController.text,
-                      _genderController.text,
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Signed Up Successfully')),
-                    );
-                    Navigator.of(context)
-                        .pushReplacement(MaterialPageRoute(builder: (context) {
-                      return const LoginScreen();
-                    }));
-                  } catch (e) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Sign Up Failed')),
-                    );
-                  }
-                },
-                buttonTxt: const Text(
-                  'SIGN UP',
-                  style: TextStyle(fontSize: 18, color: Colors.white),
+                const SizedBox(height: 10),
+                Image.asset(
+                  'assets/images/food.png', // Image of food or restaurant theme
+                  height: 150,
                 ),
-              ),
+                const SizedBox(height: 20),
+                // Name Field
+                SignupTextField(
+                  controller: _nameController,
+                  label: 'Name',
+                  icon: Icons.person, // Icon for name field
+                  passwordText: false,
+                ),
 
-              const SizedBox(height: 10),
-              // Terms and Conditions
-              const Text(
-                'By signing up, you agree to our Terms & Conditions.',
-                style: TextStyle(fontSize: 12, color: Colors.grey),
-                textAlign: TextAlign.center,
-              ),
-            ],
+                const SizedBox(height: 15),
+                // Age Field
+                SignupTextField(
+                  controller: _ageController,
+                  label: 'Age',
+                  icon: Icons.cake,
+                  passwordText: false,
+                ),
+                const SizedBox(height: 15),
+                // Gender Field
+                SignupTextField(
+                  controller: _genderController,
+                  label: 'Gender',
+                  icon: Icons.transgender,
+                  passwordText: false,
+                ),
+
+                const SizedBox(height: 15),
+                // Email Field
+                SignupTextField(
+                  controller: _emailController,
+                  label: 'Email',
+                  icon: Icons.email,
+                  passwordText: false,
+                ),
+                const SizedBox(height: 15),
+                // Password Field
+                SignupTextField(
+                  controller: _passwordController,
+                  label: 'Password',
+                  icon: Icons.lock,
+                  passwordText: true,
+                ),
+                const SizedBox(height: 20),
+
+                // Signup Button
+                CustomButton(
+                  onPress: () async {
+                    try {
+                      await _authService.signUpUser(
+                        _emailController.text,
+                        _passwordController.text,
+                        _ageController.text,
+                        _nameController.text,
+                        _genderController.text,
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Signed Up Successfully')),
+                      );
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) {
+                        return const LoginScreen();
+                      }));
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Sign Up Failed')),
+                      );
+                    }
+                  },
+                  buttonTxt: const Text(
+                    'SIGN UP',
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                ),
+
+                const SizedBox(height: 10),
+                // Terms and Conditions
+                const Text(
+                  'By signing up, you agree to our Terms & Conditions.',
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -24,31 +24,40 @@ class OrderDetailsScreen extends StatelessWidget {
         backgroundColor: Colors.orangeAccent,
         foregroundColor: Colors.white,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              'Item: $itemName',
-            ),
-            const SizedBox(height: 10),
-            Text('Quantity: $quantity'),
-            const SizedBox(height: 10),
-            Text('Price: $price'),
-            const Spacer(),
-            CustomButton(
-              onPress: () async {
-                // Move order to progress tab
-                await moveOrder(orderId, 'orders', 'progress');
-                Navigator.pop(context);
-              },
-              buttonTxt: const Text(
-                'Accept Order',
-                style: TextStyle(fontSize: 18, color: Colors.white),
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                opacity: 0.2,
+                image: AssetImage('assets/images/background.jpg'))),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'Item: $itemName',
               ),
-            ),
-          ],
+              const SizedBox(height: 10),
+              Text('Quantity: $quantity'),
+              const SizedBox(height: 10),
+              Text('Price: $price'),
+              const Spacer(),
+              CustomButton(
+                onPress: () async {
+                  // Move order to progress tab
+                  await moveOrder(orderId, 'orders', 'progress');
+                  Navigator.pop(context);
+                },
+                buttonTxt: const Text(
+                  'Accept Order',
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

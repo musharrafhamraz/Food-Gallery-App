@@ -10,10 +10,10 @@ class MenuInputScreen extends StatefulWidget {
   const MenuInputScreen({super.key});
 
   @override
-  _MenuInputScreenState createState() => _MenuInputScreenState();
+  MenuInputScreenState createState() => MenuInputScreenState();
 }
 
-class _MenuInputScreenState extends State<MenuInputScreen> {
+class MenuInputScreenState extends State<MenuInputScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
@@ -46,133 +46,142 @@ class _MenuInputScreenState extends State<MenuInputScreen> {
         backgroundColor: Colors.orangeAccent,
         foregroundColor: Colors.white,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              CustomTextField(
-                controller: _nameController,
-                label: 'Item Name',
-                maxLines: 1,
-              ),
-              const SizedBox(height: 20),
-              CustomTextField(
-                controller: _descriptionController,
-                label: 'Description',
-                maxLines: 3,
-              ),
-              const SizedBox(height: 20),
-              CustomTextField(
-                controller: _priceController,
-                label: 'Price',
-                keyboardType: TextInputType.number,
-              ),
-              const SizedBox(height: 20),
-              DropdownButtonFormField<String>(
-                value: _selectedCategory,
-                hint: const Text('Select Category'),
-                items: _categories.map((String category) {
-                  return DropdownMenuItem<String>(
-                    value: category,
-                    child: Text(category),
-                  );
-                }).toList(),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    _selectedCategory = newValue;
-                  });
-                },
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.orange[50],
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(color: Colors.orangeAccent),
-                  ),
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                opacity: 0.2,
+                image: AssetImage('assets/images/background.jpg'))),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                CustomTextField(
+                  controller: _nameController,
+                  label: 'Item Name',
+                  maxLines: 1,
                 ),
-              ),
-              const SizedBox(height: 20),
-              GestureDetector(
-                onTap: _pickImage,
-                child: Container(
-                  height: 150,
-                  decoration: BoxDecoration(
-                    color: Colors.orange[50],
-                    border: Border.all(color: Colors.orangeAccent),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: _imageFile != null
-                      ? Image.file(_imageFile!, fit: BoxFit.cover)
-                      : const Center(
-                          child: Text(
-                            'Tap to pick an image',
-                            style: TextStyle(color: Colors.orangeAccent),
-                          ),
-                        ),
+                const SizedBox(height: 20),
+                CustomTextField(
+                  controller: _descriptionController,
+                  label: 'Description',
+                  maxLines: 3,
                 ),
-              ),
-              const SizedBox(height: 40),
-              CustomButton(
-                onPress: () async {
-                  final String name = _nameController.text;
-                  final String description = _descriptionController.text;
-                  final String price = _priceController.text;
-
-                  if (name.isEmpty ||
-                      description.isEmpty ||
-                      price.isEmpty ||
-                      _imageFile == null ||
-                      _selectedCategory == null) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content: Text(
-                              'Please fill in all fields, pick an image, and select a category')),
+                const SizedBox(height: 20),
+                CustomTextField(
+                  controller: _priceController,
+                  label: 'Price',
+                  keyboardType: TextInputType.number,
+                ),
+                const SizedBox(height: 20),
+                DropdownButtonFormField<String>(
+                  value: _selectedCategory,
+                  hint: const Text('Select Category'),
+                  items: _categories.map((String category) {
+                    return DropdownMenuItem<String>(
+                      value: category,
+                      child: Text(category),
                     );
-                    return;
-                  }
-
-                  try {
-                    FirebaseService firebaseService = FirebaseService();
-                    await firebaseService.saveMenuItem(
-                      name: name,
-                      description: description,
-                      price: price,
-                      imageFile: _imageFile!,
-                      category:
-                          _selectedCategory!, // Save the selected category
-                    );
-
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content: Text('Menu item added successfully!')),
-                    );
-
-                    // Clear the fields after successful submission
-                    _nameController.clear();
-                    _descriptionController.clear();
-                    _priceController.clear();
+                  }).toList(),
+                  onChanged: (String? newValue) {
                     setState(() {
-                      _imageFile = null;
-                      _selectedCategory = null;
+                      _selectedCategory = newValue;
                     });
-                  } catch (e) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Error: $e')),
-                    );
-                  }
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) {
-                    return const TailorDashboard();
-                  }));
-                },
-                buttonTxt: const Text(
-                  'Add Menu Item',
-                  style: TextStyle(fontSize: 18, color: Colors.white),
+                  },
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.orange[50],
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide(color: Colors.orangeAccent),
+                    ),
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 20),
+                GestureDetector(
+                  onTap: _pickImage,
+                  child: Container(
+                    height: 150,
+                    decoration: BoxDecoration(
+                      color: Colors.orange[50],
+                      border: Border.all(color: Colors.orangeAccent),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: _imageFile != null
+                        ? Image.file(_imageFile!, fit: BoxFit.cover)
+                        : const Center(
+                            child: Text(
+                              'Tap to pick an image',
+                              style: TextStyle(color: Colors.orangeAccent),
+                            ),
+                          ),
+                  ),
+                ),
+                const SizedBox(height: 40),
+                CustomButton(
+                  onPress: () async {
+                    final String name = _nameController.text;
+                    final String description = _descriptionController.text;
+                    final String price = _priceController.text;
+
+                    if (name.isEmpty ||
+                        description.isEmpty ||
+                        price.isEmpty ||
+                        _imageFile == null ||
+                        _selectedCategory == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text(
+                                'Please fill in all fields, pick an image, and select a category')),
+                      );
+                      return;
+                    }
+
+                    try {
+                      FirebaseService firebaseService = FirebaseService();
+                      await firebaseService.saveMenuItem(
+                        name: name,
+                        description: description,
+                        price: price,
+                        imageFile: _imageFile!,
+                        category:
+                            _selectedCategory!, // Save the selected category
+                      );
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text('Menu item added successfully!')),
+                      );
+
+                      // Clear the fields after successful submission
+                      _nameController.clear();
+                      _descriptionController.clear();
+                      _priceController.clear();
+                      setState(() {
+                        _imageFile = null;
+                        _selectedCategory = null;
+                      });
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Error: $e')),
+                      );
+                    }
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return const TailorDashboard();
+                    }));
+                  },
+                  buttonTxt: const Text(
+                    'Add Menu Item',
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
