@@ -1,92 +1,30 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:flutter/material.dart';
-// import 'package:tailorapp/screens/customer_side/menu_list_item_details.dart';
-// import 'package:tailorapp/widgets/menu_item.dart';
-
-// class UserMenuListScreen extends StatelessWidget {
-//   const UserMenuListScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Food Gallery'),
-//         backgroundColor: Colors.orangeAccent,
-//         foregroundColor: Colors.white,
-//       ),
-//       body: StreamBuilder<QuerySnapshot>(
-//         stream: FirebaseFirestore.instance.collection('menuItems').snapshots(),
-//         builder: (context, snapshot) {
-//           if (snapshot.connectionState == ConnectionState.waiting) {
-//             return const Center(
-//               child: CircularProgressIndicator(),
-//             );
-//           }
-//           if (snapshot.hasError) {
-//             return const Center(
-//               child: Text('Error loading menu items'),
-//             );
-//           }
-
-//           final menuItems = snapshot.data!.docs;
-
-//           if (menuItems.isEmpty) {
-//             return const Center(
-//               child: Text(
-//                 'No menu items available',
-//                 style: TextStyle(fontSize: 18, color: Colors.grey),
-//               ),
-//             );
-//           }
-
-//           // Using GridView.builder to display menu items in a grid
-//           return GridView.builder(
-//             padding: const EdgeInsets.all(16.0),
-//             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-//               crossAxisCount: 2, // 2 items per row
-//               crossAxisSpacing: 16.0,
-//               mainAxisSpacing: 16.0,
-//               childAspectRatio: 0.7, // Adjust the height/width ratio
-//             ),
-//             itemCount: menuItems.length,
-//             itemBuilder: (context, index) {
-//               final menuItem = menuItems[index];
-
-//               return GestureDetector(
-//                 onTap: () {
-//                   Navigator.push(
-//                     context,
-//                     MaterialPageRoute(
-//                       builder: (context) => UserMenuItemDetailScreen(
-//                         name: menuItem['name'],
-//                         description: menuItem['description'],
-//                         price: menuItem['price'].toString(),
-//                         imageUrl: menuItem['imageUrl'],
-//                       ),
-//                     ),
-//                   );
-//                 },
-//                 child: MenuItem(
-//                   name: menuItem['name'],
-//                   description: menuItem['description'],
-//                   price: menuItem['price'].toString(),
-//                   imageUrl: menuItem['imageUrl'],
-//                 ),
-//               );
-//             },
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:tailorapp/screens/customer_side/all_menu_list.dart';
 import 'package:tailorapp/screens/customer_side/menu_list_item_details.dart';
 import 'package:tailorapp/widgets/menu_item.dart';
 
-class UserMenuListScreen extends StatelessWidget {
+class UserMenuListScreen extends StatefulWidget {
   const UserMenuListScreen({super.key});
+
+  @override
+  State<UserMenuListScreen> createState() => _UserMenuListScreenState();
+}
+
+class _UserMenuListScreenState extends State<UserMenuListScreen> {
+  String? _selectedCategory; // Track the selected category
+
+  void _updateSelectedCategory(String category) {
+    setState(() {
+      _selectedCategory = category;
+    });
+  }
+
+  void _showAllItems(String category) {
+    setState(() {
+      _selectedCategory = null;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -164,22 +102,32 @@ class UserMenuListScreen extends StatelessWidget {
 
                       const SizedBox(height: 16),
                       // Category Scrollable Row
-                      const SingleChildScrollView(
+                      SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: [
                             CategoryButton(
+                                onSelectCategory: _showAllItems,
+                                imgPath: 'assets/images/food.png',
+                                label: 'All'),
+                            CategoryButton(
+                                onSelectCategory: _updateSelectedCategory,
                                 imgPath: 'assets/images/burger.png',
                                 label: 'Burger'),
                             CategoryButton(
-                                imgPath: 'assets/images/tea.png', label: 'Tea'),
+                                onSelectCategory: _updateSelectedCategory,
+                                imgPath: 'assets/images/tea.png',
+                                label: 'Tea'),
                             CategoryButton(
+                                onSelectCategory: _updateSelectedCategory,
                                 imgPath: 'assets/images/biryani.png',
                                 label: 'Biryani'),
                             CategoryButton(
+                                onSelectCategory: _updateSelectedCategory,
                                 imgPath: 'assets/images/chinese.png',
                                 label: 'Chinese'),
                             CategoryButton(
+                                onSelectCategory: _updateSelectedCategory,
                                 imgPath: 'assets/images/juice.png',
                                 label: 'Juices'),
                           ],
@@ -202,7 +150,13 @@ class UserMenuListScreen extends StatelessWidget {
                               fontFamily: 'Open Sans'),
                         ),
                         TextButton(
-                            onPressed: () {}, child: const Text('See All'))
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return const AllMenuList();
+                              }));
+                            },
+                            child: const Text('See All'))
                       ]),
                 ),
                 const SizedBox(height: 8),
@@ -212,9 +166,14 @@ class UserMenuListScreen extends StatelessWidget {
                   height: 280, // Adjust height to fit your design needs
 
                   child: StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance
-                        .collection('menuItems')
-                        .snapshots(),
+                    stream: (_selectedCategory == null)
+                        ? FirebaseFirestore.instance
+                            .collection('menuItems')
+                            .snapshots()
+                        : FirebaseFirestore.instance
+                            .collection('menuItems')
+                            .where('category', isEqualTo: _selectedCategory)
+                            .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(
@@ -238,7 +197,6 @@ class UserMenuListScreen extends StatelessWidget {
                         );
                       }
 
-                      // Using ListView.builder to display menu items in a horizontal list
                       return ListView.builder(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         scrollDirection: Axis.horizontal,
@@ -343,14 +301,19 @@ class UserMenuListScreen extends StatelessWidget {
 class CategoryButton extends StatelessWidget {
   final String imgPath;
   final String label;
+  final Function(String) onSelectCategory;
 
-  const CategoryButton({super.key, required this.label, required this.imgPath});
+  const CategoryButton(
+      {super.key,
+      required this.label,
+      required this.imgPath,
+      required this.onSelectCategory});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // print('hello');
+        onSelectCategory(label);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
