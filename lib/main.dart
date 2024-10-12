@@ -1,9 +1,9 @@
-// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-// import 'package:tailorapp/screens/customer_side/customer_dashboard.dart';
+import 'package:tailorapp/auth/login_screen.dart';
+import 'package:tailorapp/screens/customer_side/customer_dashboard.dart';
 import 'package:tailorapp/screens/tailor_dashboard.dart';
-// import 'package:tailorapp/screens/tailor_dashboard.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,18 +19,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const String restaurantEmail = 'musharrafhamraz328@gmail.com';
     return MaterialApp(
-      title: 'Food Gallery App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      debugShowCheckedModeBanner: false,
+      home: FirebaseAuth.instance.currentUser != null &&
+              FirebaseAuth.instance.currentUser!.emailVerified
+          ? (FirebaseAuth.instance.currentUser!.email == restaurantEmail &&
+                  FirebaseAuth.instance.currentUser!.emailVerified
+              ? const TailorDashboard()
+              : const UserMenuListScreen())
+          : const LoginScreen(),
+
       // home: FirebaseAuth.instance.currentUser != null &&
       //         FirebaseAuth.instance.currentUser!.emailVerified
       //     ? const UserMenuListScreen()
       //     : const LoginScreen(),
-
-      home: const TailorDashboard(),
     );
   }
 }

@@ -99,11 +99,21 @@ class LoginScreenState extends State<LoginScreen> {
                     );
 
                     // Check if the email is the specific owner email
-                    if (_emailController.text == 'foodgallery@gmail.com') {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                            builder: (context) => const TailorDashboard()),
-                      );
+                    if (_emailController.text ==
+                        'musharrafhamraz328@gmail.com') {
+                      if (userC!.user != null) {
+                        if (userC.user!.emailVerified) {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                                builder: (context) => const TailorDashboard()),
+                          );
+                        } else {
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (context) {
+                            return const EmailVerificationScreen();
+                          }));
+                        }
+                      }
                     } else {
                       if (userC!.user != null) {
                         if (userC.user!.emailVerified) {
