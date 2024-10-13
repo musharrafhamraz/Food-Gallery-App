@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tailorapp/screens/customer_side/all_menu_list.dart';
+import 'package:tailorapp/screens/customer_side/customer_drawer.dart';
 import 'package:tailorapp/screens/customer_side/menu_list_item_details.dart';
 import 'package:tailorapp/widgets/menu_item.dart';
 
@@ -13,6 +14,8 @@ class UserMenuListScreen extends StatefulWidget {
 
 class _UserMenuListScreenState extends State<UserMenuListScreen> {
   String? _selectedCategory; // Track the selected category
+  final GlobalKey<ScaffoldState> _scaffoldKey =
+      GlobalKey<ScaffoldState>(); // Step 1: Create a GlobalKey
 
   void _updateSelectedCategory(String category) {
     setState(() {
@@ -29,6 +32,8 @@ class _UserMenuListScreenState extends State<UserMenuListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey, // Step 2: Assign the key to the Scaffold
+      drawer: const CustomerDrawer(),
       body: Container(
         height: double.infinity,
         width: double.infinity,
@@ -49,20 +54,38 @@ class _UserMenuListScreenState extends State<UserMenuListScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'FOOD GALLERY',
-                        style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Open Sans'),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'FOOD GALLERY',
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Open Sans'),
+                              ),
+                              Text(
+                                'Order Your Favourite Food',
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w300,
+                                    fontFamily: 'Open Sans'),
+                              ),
+                            ],
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              _scaffoldKey.currentState
+                                  ?.openDrawer(); // Step 3: Open the drawer
+                            },
+                            icon: const Icon(Icons.menu, size: 30),
+                          ),
+                        ],
                       ),
-                      const Text(
-                        'Order Your Favourite Food',
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w300,
-                            fontFamily: 'Open Sans'),
-                      ),
+
                       const SizedBox(height: 16),
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
