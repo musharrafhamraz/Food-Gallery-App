@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tailorapp/screens/customer_side/all_menu_list.dart';
 import 'package:tailorapp/screens/customer_side/customer_drawer.dart';
 import 'package:tailorapp/screens/customer_side/menu_list_item_details.dart';
+import 'package:tailorapp/widgets/background_widget.dart';
 import 'package:tailorapp/widgets/menu_item.dart';
 
 class UserMenuListScreen extends StatefulWidget {
@@ -34,15 +35,8 @@ class _UserMenuListScreenState extends State<UserMenuListScreen> {
     return Scaffold(
       key: _scaffoldKey, // Step 2: Assign the key to the Scaffold
       drawer: const CustomerDrawer(),
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                opacity: 0.2,
-                image: AssetImage('assets/images/background.jpg'))),
-        child: Padding(
+      body: BackgroundWidget(
+        backgroundImage: Padding(
           padding: const EdgeInsets.only(top: 50),
           child: SingleChildScrollView(
             child: Column(

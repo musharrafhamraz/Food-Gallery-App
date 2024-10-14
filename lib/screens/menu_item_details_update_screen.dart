@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tailorapp/widgets/background_widget.dart';
 import 'package:tailorapp/widgets/custom_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -24,15 +25,8 @@ class MenuItemDetailScreen extends StatelessWidget {
         backgroundColor: Colors.orangeAccent,
         foregroundColor: Colors.white,
       ),
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                opacity: 0.2,
-                image: AssetImage('assets/images/background.jpg'))),
-        child: Column(
+      body: BackgroundWidget(
+        backgroundImage: Column(
           children: [
             Expanded(
               child: SingleChildScrollView(

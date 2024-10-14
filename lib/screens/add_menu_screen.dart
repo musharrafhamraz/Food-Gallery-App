@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tailorapp/firebase/firebase_services.dart';
 import 'package:tailorapp/screens/tailor_dashboard.dart';
+import 'package:tailorapp/widgets/background_widget.dart';
 import 'package:tailorapp/widgets/custom_button.dart';
 import 'package:tailorapp/widgets/custom_textfield.dart';
 
@@ -46,15 +47,8 @@ class MenuInputScreenState extends State<MenuInputScreen> {
         backgroundColor: Colors.orangeAccent,
         foregroundColor: Colors.white,
       ),
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                opacity: 0.2,
-                image: AssetImage('assets/images/background.jpg'))),
-        child: SingleChildScrollView(
+      body: BackgroundWidget(
+        backgroundImage: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -97,7 +91,7 @@ class MenuInputScreenState extends State<MenuInputScreen> {
                     fillColor: Colors.orange[50],
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.0),
-                      borderSide: BorderSide(color: Colors.orangeAccent),
+                      borderSide: const BorderSide(color: Colors.orangeAccent),
                     ),
                   ),
                 ),

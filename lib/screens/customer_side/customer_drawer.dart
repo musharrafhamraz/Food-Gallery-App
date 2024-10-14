@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tailorapp/screens/customer_side/customer_order_list.dart';
 
 class CustomerDrawer extends StatelessWidget {
@@ -23,7 +24,7 @@ class CustomerDrawer extends StatelessWidget {
         }
       }
     } catch (e) {
-      print('Error fetching user name: $e');
+      Fluttertoast.showToast(msg: 'Error While Fetching Name.');
     }
     return null;
   }
@@ -45,7 +46,7 @@ class CustomerDrawer extends StatelessWidget {
         }
       }
     } catch (e) {
-      print('Error fetching user email: $e');
+      Fluttertoast.showToast(msg: 'Error While Fetching Email.');
     }
     return null;
   }
@@ -125,19 +126,19 @@ class CustomerDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.home),
-            title: Text('Home'),
+            leading: const Icon(Icons.home),
+            title: const Text('Home'),
             onTap: () {
               // Handle Home navigation
               Navigator.of(context).pop();
             },
           ),
           ListTile(
-            leading: Icon(Icons.history),
-            title: Text('Order History'),
+            leading: const Icon(Icons.history),
+            title: const Text('Order History'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return UserOrdersScreen();
+                return const UserOrdersScreen();
               }));
             },
           ),
@@ -145,8 +146,8 @@ class CustomerDrawer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 20.0),
             child: ListTile(
-              leading: Icon(Icons.logout),
-              title: Text('Logout'),
+              leading: const Icon(Icons.logout),
+              title: const Text('Logout'),
               onTap: () {
                 // Handle Logout
               },

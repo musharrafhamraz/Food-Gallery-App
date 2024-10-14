@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tailorapp/auth/auth_services.dart';
 import 'package:tailorapp/auth/login_screen.dart';
+import 'package:tailorapp/widgets/background_widget.dart';
 import 'package:tailorapp/widgets/custom_button.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -27,15 +28,8 @@ class SignupScreenState extends State<SignupScreen> {
         backgroundColor: Colors.orangeAccent, // Food-inspired color
         foregroundColor: Colors.white,
       ),
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                opacity: 0.2,
-                image: AssetImage('assets/images/background.jpg'))),
-        child: SingleChildScrollView(
+      body: BackgroundWidget(
+        backgroundImage: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(

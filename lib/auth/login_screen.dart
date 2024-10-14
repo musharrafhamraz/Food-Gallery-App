@@ -6,6 +6,7 @@ import 'package:tailorapp/auth/email_verification.dart';
 import 'package:tailorapp/auth/sign_up_screen.dart';
 import 'package:tailorapp/screens/customer_side/customer_dashboard.dart';
 import 'package:tailorapp/screens/tailor_dashboard.dart';
+import 'package:tailorapp/widgets/background_widget.dart';
 import 'package:tailorapp/widgets/custom_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -32,15 +33,8 @@ class LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.orangeAccent, // Foody theme color
         foregroundColor: Colors.white,
       ),
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                opacity: 0.2,
-                image: AssetImage('assets/images/background.jpg'))),
-        child: SingleChildScrollView(
+      body: BackgroundWidget(
+        backgroundImage: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

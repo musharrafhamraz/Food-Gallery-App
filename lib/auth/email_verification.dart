@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tailorapp/screens/customer_side/customer_dashboard.dart';
+import 'package:tailorapp/widgets/background_widget.dart';
 
 class EmailVerificationScreen extends StatefulWidget {
   const EmailVerificationScreen({super.key});
@@ -20,7 +21,7 @@ class EmailVerificationScreenState extends State<EmailVerificationScreen> {
 
     FirebaseAuth.instance.currentUser!.sendEmailVerification();
 
-    timer = Timer.periodic(Duration(seconds: 5), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 5), (timer) {
       checkEmailVerification();
     });
   }
@@ -52,15 +53,8 @@ class EmailVerificationScreenState extends State<EmailVerificationScreen> {
         backgroundColor: Colors.orangeAccent,
         foregroundColor: Colors.white,
       ),
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                opacity: 0.2,
-                image: AssetImage('assets/images/background.jpg'))),
-        child: Column(
+      body: BackgroundWidget(
+        backgroundImage: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

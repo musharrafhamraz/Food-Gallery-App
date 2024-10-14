@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart'; // For Firebase Authentication
-import 'package:cloud_firestore/cloud_firestore.dart'; // For Firebase Firestore (storing the order)
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart'; // For Firebase Firestore (storing the order)
 
 Future<void> placeOrder(String itemName, int quantity, String price) async {
   // Get the currently signed-in user
@@ -37,11 +38,9 @@ Future<void> placeOrder(String itemName, int quantity, String price) async {
 
     // Store the order in Firestore
     await FirebaseFirestore.instance.collection('orders').add(orderData);
-
-    print("Order placed successfully.");
   } catch (e) {
     // Handle errors here (e.g., failed to place order)
-    print("Failed to place order: $e");
+    Fluttertoast.showToast(msg: 'Error... Placing Order!');
   }
 }
 

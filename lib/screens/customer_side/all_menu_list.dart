@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tailorapp/screens/customer_side/menu_list_item_details.dart';
+import 'package:tailorapp/widgets/background_widget.dart';
 import 'package:tailorapp/widgets/menu_item.dart';
 
 class AllMenuList extends StatelessWidget {
@@ -14,15 +15,8 @@ class AllMenuList extends StatelessWidget {
         backgroundColor: Colors.orangeAccent,
         foregroundColor: Colors.white,
       ),
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                opacity: 0.2,
-                image: AssetImage('assets/images/background.jpg'))),
-        child: StreamBuilder<QuerySnapshot>(
+      body: BackgroundWidget(
+        backgroundImage: StreamBuilder<QuerySnapshot>(
           stream:
               FirebaseFirestore.instance.collection('menuItems').snapshots(),
           builder: (context, snapshot) {

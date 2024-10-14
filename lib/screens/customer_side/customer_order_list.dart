@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lottie/lottie.dart';
+import 'package:tailorapp/widgets/background_widget.dart';
 
 class UserOrdersScreen extends StatefulWidget {
   const UserOrdersScreen({super.key});
@@ -75,15 +76,8 @@ class UserOrdersScreenState extends State<UserOrdersScreen> {
         backgroundColor: Colors.orangeAccent, // Foody theme color
         foregroundColor: Colors.white,
       ),
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                opacity: 0.2,
-                image: AssetImage('assets/images/background.jpg'))),
-        child: StreamBuilder<List<Map<String, dynamic>>>(
+      body: BackgroundWidget(
+        backgroundImage: StreamBuilder<List<Map<String, dynamic>>>(
           stream: _getUserOrders(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {

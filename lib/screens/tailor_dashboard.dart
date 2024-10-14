@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tailorapp/firebase/order_services.dart';
 import 'package:tailorapp/screens/add_menu_screen.dart';
 import 'package:tailorapp/screens/order_details_screen.dart';
+import 'package:tailorapp/widgets/background_widget.dart';
 import 'package:tailorapp/widgets/custom_drawer.dart';
 import 'package:tailorapp/widgets/dialog_box.dart';
 
@@ -50,15 +51,8 @@ class TailorDashboardState extends State<TailorDashboard>
         ),
       ),
       drawer: const CustomDrawer(),
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                opacity: 0.2,
-                image: AssetImage('assets/images/background.jpg'))),
-        child: TabBarView(
+      body: BackgroundWidget(
+        backgroundImage: TabBarView(
           controller: _tabController,
           children: [
             _buildOrdersTab('orders'),

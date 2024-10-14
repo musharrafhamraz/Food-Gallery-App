@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AuthService {
   // Firebase Auth instance
@@ -25,10 +26,8 @@ class AuthService {
         'gender': gender,
         'email': email,
       });
-
-      print('User signed up successfully!');
     } catch (e) {
-      print('Sign-up failed: $e');
+      Fluttertoast.showToast(msg: 'Error... Signing Up!');
       rethrow;
     }
   }
@@ -43,7 +42,7 @@ class AuthService {
 
       return userCredential; // Return the user credential for navigation check
     } catch (e) {
-      print('Login failed: $e');
+      Fluttertoast.showToast(msg: 'Error... Login Failed.');
       rethrow;
     }
   }

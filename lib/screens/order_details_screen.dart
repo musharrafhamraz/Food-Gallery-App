@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tailorapp/firebase/order_services.dart';
+import 'package:tailorapp/widgets/background_widget.dart';
 import 'package:tailorapp/widgets/custom_button.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
@@ -24,15 +25,8 @@ class OrderDetailsScreen extends StatelessWidget {
         backgroundColor: Colors.orangeAccent,
         foregroundColor: Colors.white,
       ),
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                opacity: 0.2,
-                image: AssetImage('assets/images/background.jpg'))),
-        child: Padding(
+      body: BackgroundWidget(
+        backgroundImage: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
