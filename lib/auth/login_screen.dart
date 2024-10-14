@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tailorapp/auth/auth_services.dart';
 import 'package:tailorapp/auth/email_verification.dart';
+import 'package:tailorapp/auth/forgot_password_screen.dart';
 import 'package:tailorapp/auth/sign_up_screen.dart';
 import 'package:tailorapp/screens/customer_side/customer_dashboard.dart';
 import 'package:tailorapp/screens/tailor_dashboard.dart';
@@ -23,6 +24,21 @@ class LoginScreenState extends State<LoginScreen> {
   final AuthService _authService = AuthService();
 
   bool loggingIn = false;
+
+  var _obsecureText = true;
+
+  togglePassword() {
+    setState(() {
+      _obsecureText = !_obsecureText;
+    });
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +78,8 @@ class LoginScreenState extends State<LoginScreen> {
               TextField(
                 controller: _emailController,
                 decoration: const InputDecoration(
-                  labelText: 'Email',
+                  // labelText: 'Email',
+                  hintText: 'Email',
                   prefixIcon: Icon(Icons.email, color: Colors.orangeAccent),
                   border: OutlineInputBorder(),
                 ),
@@ -71,11 +88,26 @@ class LoginScreenState extends State<LoginScreen> {
               // Password Field
               TextField(
                 controller: _passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
-                  prefixIcon: Icon(Icons.lock, color: Colors.orangeAccent),
-                  border: OutlineInputBorder(),
+                obscureText: _obsecureText,
+                decoration: InputDecoration(
+                  hintText: '********',
+                  prefixIcon:
+                      const Icon(Icons.lock, color: Colors.orangeAccent),
+                  border: const OutlineInputBorder(),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      togglePassword();
+                    },
+                    icon: _obsecureText
+                        ? Icon(
+                            Icons.remove_red_eye,
+                            color: Theme.of(context).colorScheme.primary,
+                          )
+                        : Icon(
+                            Icons.remove_red_eye_outlined,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
@@ -149,7 +181,10 @@ class LoginScreenState extends State<LoginScreen> {
               // Forgot Password Text Button
               TextButton(
                 onPressed: () {
-                  // Add your forgot password logic here
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return const ForgotPasswordScreen();
+                  }));
                 },
                 child: const Text(
                   'Forgot Password?',
@@ -167,7 +202,7 @@ class LoginScreenState extends State<LoginScreen> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushReplacement(context,
+                      Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
                         return const SignupScreen();
                       }));

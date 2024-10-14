@@ -20,6 +20,24 @@ class SignupScreenState extends State<SignupScreen> {
 
   final AuthService _authService = AuthService();
 
+  var _obsecureText = true;
+
+  togglePassword() {
+    setState(() {
+      _obsecureText = !_obsecureText;
+    });
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _ageController.dispose();
+    _genderController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,6 +83,7 @@ class SignupScreenState extends State<SignupScreen> {
                   label: 'Age',
                   icon: Icons.cake,
                   passwordText: false,
+                  type: TextInputType.number,
                 ),
                 const SizedBox(height: 15),
                 // Gender Field
@@ -89,7 +108,21 @@ class SignupScreenState extends State<SignupScreen> {
                   controller: _passwordController,
                   label: 'Password',
                   icon: Icons.lock,
-                  passwordText: true,
+                  passwordText: _obsecureText,
+                  suffixicon: IconButton(
+                    onPressed: () {
+                      togglePassword();
+                    },
+                    icon: _obsecureText
+                        ? Icon(
+                            Icons.remove_red_eye,
+                            color: Theme.of(context).colorScheme.primary,
+                          )
+                        : Icon(
+                            Icons.remove_red_eye_outlined,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                  ),
                 ),
                 const SizedBox(height: 20),
 
@@ -144,12 +177,17 @@ class SignupTextField extends StatelessWidget {
   final String label;
   final IconData icon;
   final bool passwordText;
+  final IconButton? suffixicon;
+  final TextInputType? type;
+
   const SignupTextField({
     super.key,
     required this.controller,
     required this.label,
     required this.icon,
     required this.passwordText,
+    this.suffixicon,
+    this.type,
   });
 
   @override
@@ -161,7 +199,9 @@ class SignupTextField extends StatelessWidget {
         labelText: label,
         prefixIcon: Icon(icon, color: Colors.orangeAccent),
         border: const OutlineInputBorder(),
+        suffixIcon: suffixicon,
       ),
+      keyboardType: type,
     );
   }
 }

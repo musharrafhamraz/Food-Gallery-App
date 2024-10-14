@@ -2,7 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tailorapp/auth/auth_services.dart';
+import 'package:tailorapp/auth/login_screen.dart';
 import 'package:tailorapp/screens/customer_side/customer_order_list.dart';
+import 'package:tailorapp/widgets/dialog_box.dart';
 
 class CustomerDrawer extends StatelessWidget {
   const CustomerDrawer({super.key});
@@ -53,6 +56,7 @@ class CustomerDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AuthService auth = AuthService();
     return Drawer(
       child: Column(
         children: [
@@ -149,7 +153,23 @@ class CustomerDrawer extends StatelessWidget {
               leading: const Icon(Icons.logout),
               title: const Text('Logout'),
               onTap: () {
-                // Handle Logout
+                showConfirmationDialog(
+                  context,
+                  'Are you sure you want to logout?',
+                  () {
+                    try {
+                      auth.logoutUser();
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (conetxt) {
+                        return const LoginScreen();
+                      }));
+                    } catch (e) {
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text(e.toString())));
+                    }
+                  },
+                  () => Navigator.of(context).pop(true),
+                );
               },
             ),
           ),
