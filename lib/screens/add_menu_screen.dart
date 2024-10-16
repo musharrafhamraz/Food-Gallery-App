@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:tailorapp/firebase/firebase_services.dart';
-import 'package:tailorapp/screens/tailor_dashboard.dart';
-import 'package:tailorapp/widgets/background_widget.dart';
-import 'package:tailorapp/widgets/custom_button.dart';
-import 'package:tailorapp/widgets/custom_textfield.dart';
+import 'package:foodapp/firebase/firebase_services.dart';
+import 'package:foodapp/screens/tailor_dashboard.dart';
+import 'package:foodapp/widgets/background_widget.dart';
+import 'package:foodapp/widgets/custom_button.dart';
+import 'package:foodapp/widgets/custom_textfield.dart';
 
 class MenuInputScreen extends StatefulWidget {
   const MenuInputScreen({super.key});
@@ -166,7 +166,7 @@ class MenuInputScreenState extends State<MenuInputScreen> {
                     }
                     Navigator.of(context)
                         .push(MaterialPageRoute(builder: (context) {
-                      return const TailorDashboard();
+                      return const RestaurantDashboard();
                     }));
                   },
                   buttonTxt: const Text(

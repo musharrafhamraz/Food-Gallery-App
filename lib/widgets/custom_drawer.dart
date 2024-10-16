@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tailorapp/auth/auth_services.dart';
-import 'package:tailorapp/auth/login_screen.dart';
-import 'package:tailorapp/screens/add_menu_screen.dart';
-import 'package:tailorapp/screens/list_of_menu_items.dart';
-import 'package:tailorapp/widgets/dialog_box.dart';
+import 'package:foodapp/auth/auth_services.dart';
+import 'package:foodapp/auth/login_screen.dart';
+import 'package:foodapp/screens/add_menu_screen.dart';
+import 'package:foodapp/screens/list_of_menu_items.dart';
+import 'package:foodapp/widgets/dialog_box.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});

@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:tailorapp/widgets/background_widget.dart';
-import 'package:tailorapp/widgets/custom_button.dart';
-import 'package:tailorapp/widgets/custom_textfield.dart';
+import 'package:foodapp/widgets/background_widget.dart';
+import 'package:foodapp/widgets/custom_button.dart';
+import 'package:foodapp/widgets/custom_textfield.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});

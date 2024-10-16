@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:tailorapp/screens/customer_side/customer_dashboard.dart';
-import 'package:tailorapp/widgets/background_widget.dart';
+import 'package:foodapp/screens/customer_side/customer_dashboard.dart';
+import 'package:foodapp/widgets/background_widget.dart';
 
 class EmailVerificationScreen extends StatefulWidget {
   const EmailVerificationScreen({super.key});

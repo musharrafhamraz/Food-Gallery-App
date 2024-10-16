@@ -2,10 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:tailorapp/auth/auth_services.dart';
-import 'package:tailorapp/auth/login_screen.dart';
-import 'package:tailorapp/screens/customer_side/customer_order_list.dart';
-import 'package:tailorapp/widgets/dialog_box.dart';
+import 'package:foodapp/auth/auth_services.dart';
+import 'package:foodapp/auth/login_screen.dart';
+import 'package:foodapp/screens/customer_side/customer_chat_screen.dart';
+import 'package:foodapp/screens/customer_side/customer_order_list.dart';
+import 'package:foodapp/widgets/dialog_box.dart';
 
 class CustomerDrawer extends StatelessWidget {
   const CustomerDrawer({super.key});
@@ -135,6 +136,16 @@ class CustomerDrawer extends StatelessWidget {
             onTap: () {
               // Handle Home navigation
               Navigator.of(context).pop();
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.chat),
+            title: const Text('Chat'),
+            onTap: () {
+              // Handle Home navigation
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return const CustomerChatScreen();
+              }));
             },
           ),
           ListTile(

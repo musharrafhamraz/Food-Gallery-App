@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:tailorapp/screens/customer_side/all_menu_list.dart';
-import 'package:tailorapp/screens/customer_side/customer_drawer.dart';
-import 'package:tailorapp/screens/customer_side/menu_list_item_details.dart';
-import 'package:tailorapp/widgets/background_widget.dart';
-import 'package:tailorapp/widgets/menu_item.dart';
+import 'package:foodapp/screens/customer_side/all_menu_list.dart';
+import 'package:foodapp/screens/customer_side/customer_drawer.dart';
+import 'package:foodapp/screens/customer_side/menu_list_item_details.dart';
+import 'package:foodapp/widgets/background_widget.dart';
+import 'package:foodapp/widgets/menu_item.dart';
 
 class UserMenuListScreen extends StatefulWidget {
   const UserMenuListScreen({super.key});

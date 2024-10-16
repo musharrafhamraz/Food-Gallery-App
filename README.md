@@ -1,4 +1,4 @@
-# tailorapp
+# foodapp
 
 A new Flutter project.
 

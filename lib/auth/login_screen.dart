@@ -1,14 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:tailorapp/auth/auth_services.dart';
-import 'package:tailorapp/auth/email_verification.dart';
-import 'package:tailorapp/auth/forgot_password_screen.dart';
-import 'package:tailorapp/auth/sign_up_screen.dart';
-import 'package:tailorapp/screens/customer_side/customer_dashboard.dart';
-import 'package:tailorapp/screens/tailor_dashboard.dart';
-import 'package:tailorapp/widgets/background_widget.dart';
-import 'package:tailorapp/widgets/custom_button.dart';
+import 'package:foodapp/auth/auth_services.dart';
+import 'package:foodapp/auth/email_verification.dart';
+import 'package:foodapp/auth/forgot_password_screen.dart';
+import 'package:foodapp/auth/sign_up_screen.dart';
+import 'package:foodapp/screens/customer_side/customer_dashboard.dart';
+import 'package:foodapp/screens/tailor_dashboard.dart';
+import 'package:foodapp/widgets/background_widget.dart';
+import 'package:foodapp/widgets/custom_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -131,7 +131,8 @@ class LoginScreenState extends State<LoginScreen> {
                         if (userC.user!.emailVerified) {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                                builder: (context) => const TailorDashboard()),
+                                builder: (context) =>
+                                    const RestaurantDashboard()),
                           );
                         } else {
                           Navigator.of(context).pushReplacement(

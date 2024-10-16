@@ -63,6 +63,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '672266491056',
     projectId: 'tailorshop-app-7a172',
     storageBucket: 'tailorshop-app-7a172.appspot.com',
-    iosBundleId: 'tailor.tailorapp',
+    iosBundleId: 'tailor.foodapp',
   );
 }

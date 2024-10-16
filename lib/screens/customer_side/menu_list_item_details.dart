@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:tailorapp/firebase/order_services.dart';
-import 'package:tailorapp/widgets/background_widget.dart';
-import 'package:tailorapp/widgets/custom_button.dart';
+import 'package:foodapp/firebase/order_services.dart';
+import 'package:foodapp/screens/customer_side/customer_dashboard.dart';
+import 'package:foodapp/widgets/background_widget.dart';
+import 'package:foodapp/widgets/custom_button.dart';
 
 class UserMenuItemDetailScreen extends StatefulWidget {
   final String name;
@@ -171,6 +172,10 @@ class _UserMenuItemDetailScreenState extends State<UserMenuItemDetailScreen> {
                           Fluttertoast.showToast(msg: 'Error Placing Order.');
                         });
                         // logic for placing order here.
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (builder) {
+                          return const UserMenuListScreen();
+                        }));
                       },
                       buttonTxt: const Text(
                         'Place Order',

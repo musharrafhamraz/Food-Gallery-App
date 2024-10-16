@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tailorapp/widgets/background_widget.dart';
-import 'package:tailorapp/widgets/custom_button.dart';
+import 'package:foodapp/widgets/background_widget.dart';
+import 'package:foodapp/widgets/custom_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class MenuItemDetailScreen extends StatelessWidget {

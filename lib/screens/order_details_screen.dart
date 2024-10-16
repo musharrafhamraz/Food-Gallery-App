@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tailorapp/firebase/order_services.dart';
-import 'package:tailorapp/widgets/background_widget.dart';
-import 'package:tailorapp/widgets/custom_button.dart';
+import 'package:foodapp/firebase/order_services.dart';
+import 'package:foodapp/widgets/background_widget.dart';
+import 'package:foodapp/widgets/custom_button.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
   final String orderId;

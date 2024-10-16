@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tailorapp/auth/auth_services.dart';
-import 'package:tailorapp/auth/login_screen.dart';
-import 'package:tailorapp/widgets/background_widget.dart';
-import 'package:tailorapp/widgets/custom_button.dart';
+import 'package:foodapp/auth/auth_services.dart';
+import 'package:foodapp/auth/login_screen.dart';
+import 'package:foodapp/widgets/background_widget.dart';
+import 'package:foodapp/widgets/custom_button.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});

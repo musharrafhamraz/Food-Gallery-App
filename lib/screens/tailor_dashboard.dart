@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:tailorapp/firebase/order_services.dart';
-import 'package:tailorapp/screens/add_menu_screen.dart';
-import 'package:tailorapp/screens/order_details_screen.dart';
-import 'package:tailorapp/widgets/background_widget.dart';
-import 'package:tailorapp/widgets/custom_drawer.dart';
-import 'package:tailorapp/widgets/dialog_box.dart';
+import 'package:foodapp/firebase/order_services.dart';
+import 'package:foodapp/screens/add_menu_screen.dart';
+import 'package:foodapp/screens/all_user_screen.dart';
+import 'package:foodapp/screens/order_details_screen.dart';
+import 'package:foodapp/widgets/background_widget.dart';
+import 'package:foodapp/widgets/custom_drawer.dart';
+import 'package:foodapp/widgets/dialog_box.dart';
 
-class TailorDashboard extends StatefulWidget {
-  const TailorDashboard({super.key});
+class RestaurantDashboard extends StatefulWidget {
+  const RestaurantDashboard({super.key});
 
   @override
-  TailorDashboardState createState() => TailorDashboardState();
+  RestaurantDashboardState createState() => RestaurantDashboardState();
 }
 
-class TailorDashboardState extends State<TailorDashboard>
+class RestaurantDashboardState extends State<RestaurantDashboard>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -38,6 +39,19 @@ class TailorDashboardState extends State<TailorDashboard>
             style: TextStyle(fontWeight: FontWeight.w600)),
         backgroundColor: Colors.orangeAccent,
         foregroundColor: Colors.white,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return AllUserScreen();
+                }));
+              },
+              icon: const Icon(
+                Icons.message,
+                color: Colors.white,
+              ))
+        ],
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: Colors.white,
