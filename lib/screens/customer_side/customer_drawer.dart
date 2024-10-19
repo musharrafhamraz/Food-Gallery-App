@@ -6,6 +6,7 @@ import 'package:foodapp/auth/auth_services.dart';
 import 'package:foodapp/auth/login_screen.dart';
 import 'package:foodapp/screens/customer_side/customer_chat_screen.dart';
 import 'package:foodapp/screens/customer_side/customer_order_list.dart';
+import 'package:foodapp/screens/customer_side/favorite_items_screen.dart';
 import 'package:foodapp/widgets/dialog_box.dart';
 
 class CustomerDrawer extends StatelessWidget {
@@ -136,6 +137,19 @@ class CustomerDrawer extends StatelessWidget {
             onTap: () {
               // Handle Home navigation
               Navigator.of(context).pop();
+            },
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.favorite,
+              color: Colors.red,
+            ),
+            title: const Text('Favorites'),
+            onTap: () {
+              // Handle Home navigation
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return const FavoriteScreen();
+              }));
             },
           ),
           ListTile(
