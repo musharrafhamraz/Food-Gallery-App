@@ -14,7 +14,7 @@ void main() async {
   runApp(
     ChangeNotifierProvider(
       create: (context) => FavoriteProvider(),
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }

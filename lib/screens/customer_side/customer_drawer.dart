@@ -142,7 +142,6 @@ class CustomerDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(
               Icons.favorite,
-              color: Colors.red,
             ),
             title: const Text('Favorites'),
             onTap: () {
